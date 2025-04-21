@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]  # Use your default branch (usually main or master)
+    branches: [main]  # Adjust this if your default branch is different
 
 permissions:
   contents: read
@@ -19,17 +19,18 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload static content
+      - name: Upload site content
         uses: actions/upload-pages-artifact@v2
         with:
-          path: '.'  # This uploads everything in your repo
+          path: '.'  # Change to './public' or './dist' if you have a build folder
 
       - name: Deploy to GitHub Pages
         id: deployment
